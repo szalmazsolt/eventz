@@ -82,7 +82,7 @@ class EventsController < ApplicationController
     params
       .require(:event)
       # the category_ids attribute will be passed as an array, so we need to specify it as an array
-      .permit(:name, :description, :location, :price, :starts_at, :capacity, :image_file_name, category_ids: [])
+      .permit(:name, :description, :location, :price, :starts_at, :capacity, category_ids: [])
   end
 
   def set_event

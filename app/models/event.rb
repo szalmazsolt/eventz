@@ -33,11 +33,7 @@ class Event < ApplicationRecord
   validates :price, numericality: {greater_than_or_equal_to: 0}
   validates :capacity, numericality: 
                       {greater_than: 0, only_integer: true}
-  validates :image_file_name, 
-            format: {
-              with: /\w+\.(jpg|png)\z/i,
-              message: "must be a jpg or png image"
-            }
+  
 
   # A scope defines a class method for us dinamically
   # first parameter is the name of the method/scope, the second is the query

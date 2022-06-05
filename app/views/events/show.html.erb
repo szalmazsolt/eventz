@@ -1,6 +1,6 @@
 <section class="event-details">
   <div class="image">
-    <%= image_tag @event.image_file_name %>
+    <%= image_tag "placeholder" %>
     <% if current_user %>
       <div class="likes">
         <%= like_or_unlike_button(@event, @like) %>
