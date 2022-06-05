@@ -1,0 +1,15 @@
+<h1>Sign In</h1>
+
+<%# since we do not have a model for sessions, we can't use the model option %>
+<%# instead we pass in the url the form will post to (the create action) %>
+<%= form_with(url: session_path, local: true) do |f| %>
+
+  <%= f.label :email %>
+  <%= f.email_field :email, autofocus: true %>
+
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+
+  <%= f.submit "Sign In" %>
+
+<% end %>

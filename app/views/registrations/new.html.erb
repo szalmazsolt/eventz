@@ -1,0 +1,16 @@
+<h1>Registration for <%= link_to @event.name, @event %></h1>
+
+<%# Because registrations are a nested resource, we need to pass both models to the form builder %>
+<%# The order matters: since event is the parent resource, it must come first in the array %>
+<%# The 'f' form builder knows it needs to build a form for the registration resource %>
+<%= form_with(model: [@event, @registration], local: true) do |f| %>
+
+  <%= render "shared/errors", object: @registration %>
+
+  <%= f.label :how_heard %>
+
+  <%# The select helper creates a selection field that takes the name of the attribute and an array of options %>
+  <%= f.select :how_heard, Registration::HOW_HEARD_OPTIONS, prompt: "Pick one" %>
+
+  <%= f.submit %>
+<% end %>

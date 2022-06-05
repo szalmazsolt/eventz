@@ -1,0 +1,33 @@
+<% @events.each do |event| %>
+  <section class="event">
+    <div class="image">
+      <%= image_tag event.image_file_name %>
+    </div>
+    <div class="summary">
+      <%# the event_path(event) method generates a route for the event %>
+      <%# how does it do it? %>
+      <%# in the Rails console, we can run app.event_path(event) %>
+      <%# it returns "/events/3" %>
+      <%# it's reasonable to think that Rails is reading the id attribute of the event %>
+      <%# but that is not what's happening %>
+      <%# Rails runs a method to_param on all ActiveRecord objects %>
+      <%# like event.to_param %>
+      <%# the method converts the object to a string of its id, "3" %>
+      <%# we can override the default behavior of the to_param method in the model class %>
+      <h2><%= link_to event.name, event_path(event) %></h2>
+      <h3><%= day_and_time(event) %> in <%= event.location %></h3>
+      <span class="price">
+        <%= price(event) %>
+      </span>     
+      <p>
+        <%= truncate(event.description, length: 35, separator: " ") %>
+      </p>  
+    </div>
+  </section>
+<% end %>
+
+<% if current_user_admin? %>
+  <section class="admin">
+    <%= link_to "Add New Event", new_event_path, class: "button" %>
+  </section>
+<% end %>
