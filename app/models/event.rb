@@ -42,6 +42,9 @@ class Event < ApplicationRecord
   validates :price, numericality: {greater_than_or_equal_to: 0}
   validates :capacity, numericality: 
                       {greater_than: 0, only_integer: true}
+
+  # Defining our own custom validation with validate and a method name
+  validate :acceptable_image
   
 
   # A scope defines a class method for us dinamically
@@ -106,6 +109,23 @@ class Event < ApplicationRecord
       # otherwise slug will just be treated as a local variable, not an attribute
       # we don't need self before reading an attribute (like "name" in this case), only when we are assigning a value to an attribute
       self.slug = name.parameterize
+    end
+
+    def acceptable_image
+      # first we check if the event has an attached image at all
+      # it it does not, we do not run the method
+      return unless main_image.attached?
+
+      unless main_image.byte_size <= 1.megabyte
+        # if the attached image is larger than 1MB we add to the error collection a custom message for the main_image attribute
+        errors.add(:main_image, "is too big")
+      end
+
+      acceptable_formats = ["image/jpeg", "image/png"]
+      unless acceptable_formats.include?(main_image.content_type)
+        errors.add(:main_image, "must be a JPEG or PNG")
+      end
+
     end
 
 end
