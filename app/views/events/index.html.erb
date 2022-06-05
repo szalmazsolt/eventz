@@ -1,7 +1,7 @@
 <% @events.each do |event| %>
   <section class="event">
     <div class="image">
-      <%= image_tag "placeholder" %>
+      <%= main_image(event) %>
     </div>
     <div class="summary">
       <%# the event_path(event) method generates a route for the event %>

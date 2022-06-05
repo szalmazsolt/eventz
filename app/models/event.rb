@@ -25,6 +25,15 @@ class Event < ApplicationRecord
 
   has_many :categorizations, dependent: :destroy
   has_many :categories, through: :categorizations
+
+  # Using ActiveStorage
+  # this declaration says there is one main image for an event
+  # main_image is a custom name, we can choose it
+  has_one_attached :main_image
+
+  # the has_one_attached method basically creates two associations:
+  # has_one :main_image_attachment, dependent: :destroy
+  # has_one :main_image_blob, through: :main_image_attachment
            
 
   validates :name, presence: true, uniqueness: true

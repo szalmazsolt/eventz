@@ -17,7 +17,7 @@
     <% @registrations.each do |r| %>
       <div class="registration">
         <div class="image">
-          <%= link_to image_tag("placeholder"), r.event %>
+          <%= link_to main_image(r.event), r.event %>
         </div>
         <div class="name">
           <%= link_to r.event.name, r.event %>
@@ -33,7 +33,7 @@
     <h3>Liked Events</h3>
     <div class="liked-events">
       <% @liked_events.each do |event| %>
-        <%= link_to image_tag("placeholder"), event_path(event) %>
+        <%= link_to main_image(event), event_path(event) %>
       <% end %>
     </div>
   <% end %>

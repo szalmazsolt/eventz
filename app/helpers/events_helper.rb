@@ -8,4 +8,13 @@ module EventsHelper
     event.starts_at.strftime("%B %d, %Y at %I:%M %P")
   end
 
+  def main_image(event)
+    # ActiveStorage gives us an attached? method to check if an event has a main image attached to it
+    if event.main_image.attached?
+      image_tag event.main_image
+    else
+      image_tag "placeholder"
+    end
+  end
+
 end
